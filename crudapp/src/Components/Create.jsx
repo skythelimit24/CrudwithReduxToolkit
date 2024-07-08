@@ -1,10 +1,12 @@
 import React,{useState} from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../Features/userDetailsSlice";
+import { useNavigate } from "react-router";
 
 const Create = () => {
 const [users,setUsers] = useState({})
 const dispatch = useDispatch()
+const navigate = useNavigate();
 const getUserData = (e)=>{
  setUsers({...users,[e.target.name]:e.target.value})
  
@@ -13,10 +15,12 @@ const getUserData = (e)=>{
 const handleSubmit =(e)=>{
 e.preventDefault();
 console.log("users....",users)
-dispatch(createUser(users))
+dispatch(createUser(users));
+navigate("/read")
 }
   return (
-    <>
+    <div>
+    <h2 style={{textAlign:"center"}}> Fill the input Form. </h2>
       <form className="w-50 mx-auto" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">
@@ -66,7 +70,7 @@ dispatch(createUser(users))
           Submit
         </button>
       </form>
-    </>
+    </div>
   );
 };
 
